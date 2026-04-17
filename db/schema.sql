@@ -1,0 +1,28 @@
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    super_user BIT DEFAULT 0,
+    require_password_reset BIT DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS lists (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    description TEXT,
+    icon TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS items (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    list_id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT,
+    image_url TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (list_id)
+        REFERENCES lists(id)
+        ON DELETE CASCADE
+);
