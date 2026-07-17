@@ -67,6 +67,7 @@ func Login(w http.ResponseWriter, r *http.Request, username string, password str
 	}
 	log.Printf("REQUEST[POST] -- User has succesfully logged in ID: |%s|%s|", userId, err)
 	SetValue(w, r, "userId", userId)
+	SetValue(w, r, "username", username)
 	return true, nil
 }
 
